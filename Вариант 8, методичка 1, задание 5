@@ -1,0 +1,61 @@
+#Вариант 8, методичка 1, задание 5
+#include <iostream>
+#include <stdio.h>
+using namespace std;
+int main()
+{
+    int i, n1, j, j2, j3, ss;
+    int n = 5;
+    int n2 = 5;
+    int a[n][n2];
+    int a2[n][n2];
+    for (i=0;i<n;i++)
+    {   
+        for(j=0;j<n;j++)
+        {
+            a[i][j]=rand()%5;
+        }
+    }
+    for (int i=0;i<n;i++)
+    { 
+        for (int j=0;j<n;j++)
+        {
+        cout<<a[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    cout<<"\n";
+    for (i=0,j2=0;i<n,j2<n;i++,j2++)
+    { 	
+        for(j=0,j3=0;j<n,j3<n;j++,j3++)
+        {
+            a2[j2][j3]=a[j][i];
+        }
+    }
+    for (int j2=0;j2<n;j2++)
+    { 
+        for (int j3=0;j3<n;j3++)
+        {
+            cout<<a2[j2][j3]<<" ";
+        }
+        cout<<"\n";
+    }
+    for (i=0,j2=0;i<n,j2<n;i++,j2++)
+    { 
+        for(j=0,j3=0;j<n,j3<n;j++,j3++)
+        {
+            if (a[i][j]=a2[j2][j3])
+            {
+                ss++;    
+            }
+        }
+    }
+    if(ss==n*n) 
+    {
+        cout<<"\n симметрична"; 
+    }
+    else
+    {
+        cout<<"\n не симметрична";
+    }
+}
