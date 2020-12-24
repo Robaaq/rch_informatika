@@ -1,0 +1,141 @@
+#Вариант 8, методичка 2, задание 7 работает: Печать названия экзамена, даты экзамена 
+# и среднего балла(Функция с умалчиваемыми параметрами) и Поиск заданного элемента в массиве(Перегруженные функции и шаблон функции)
+#include <iostream>
+#include <math.h>
+#include <cstring>
+#include <cstdarg>
+using namespace std;
+
+const int n = 5;
+char mas1[n][10];
+int mas2[n];
+char mas3[n][5];
+void init(int i, const char* naz_ekz = "ss ", int data = 23.12)
+{
+	strcpy_s(mas1[i], naz_ekz);
+	mas2[i] = data;
+}
+void init2(int i, const char* sr_ball = "0 ")
+{
+	strcpy_s(mas3[i], sr_ball);
+}
+//int fperem(int k, ...)
+//{
+//	int* p = &k;	 //Функция с переменным числом параметров не работает
+//	int s = *p;
+//	for (int i = 1; p != 0; i++)
+//	{
+//		if (k < s)
+//		{
+//			k = s;
+//		}
+//		i++;
+//	}
+//	return k;
+//}
+template<class T>
+T poisk(T a, T b)
+{
+	int k1 = 0;
+	if (a == b)
+	{	
+		cout << "Есть такой элемент  " << a; //Перегруженные функции и шаблон функции
+		return a = 1;
+	}
+}
+//double func(double x)
+//{
+//	return x - (1 / (3 - sin(3.6) * x));
+//}
+//double func_proiz(double x)        //Метод ньютона
+//{
+//	return 1 - sin(18 / 5) / ((x * sin(18 / 5) - 3) * (x * sin(18 / 5) - 3));
+//}
+int main()
+{
+	int e, qq, q2, x0;
+	long i2;
+	//const int q = 10;
+	//int mas4[q];
+	const int np = 10;
+	int mas5[np];
+	setlocale(LC_ALL, "Russian");
+	cout << "Функция с умалчиваемыми параметрами: ";
+	for (int i = 0; i < n; i++)
+	{
+		init(i);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		char naz_ekz[10];
+		char sr_ball[5];
+		setlocale(LC_ALL, "Russian");
+		cout << "\n" << "Введите название предмета: ";
+		cin >> naz_ekz;
+		init(i, naz_ekz);
+		setlocale(LC_ALL, "Russian");
+		cout << "\n" << "Введите средний балл: ";
+		cin >> sr_ball;
+		init2(i, sr_ball);
+	}
+	for (int j = 0; j < n; j++)
+	{
+		setlocale(LC_ALL, "Russian");
+		cout << "\n" << "Название предмета: ";
+		setlocale(LC_ALL, "russian_russia.866");
+		cout << mas1[j] << "  ";
+		setlocale(LC_ALL, "Russian");
+		cout << "Дата: ";
+		setlocale(LC_ALL, "russian_russia.866");
+		cout << mas2[j] << "  ";
+		setlocale(LC_ALL, "Russian");
+		cout << "Средний балл: ";
+		setlocale(LC_ALL, "russian_russia.866");
+		cout << mas3[j] << "\n";
+	}
+	//setlocale(LC_ALL, "Russian");
+	//cout << "Функция с переменным числом параметров: ";
+	//setlocale(LC_ALL, "Russian");
+	//cout << "\n" << "Введите кличество элементов ";   //функция с переменным числом параметров не работает
+	//cin >> qq;
+	//setlocale(LC_ALL, "Russian");
+	//cout << "\n" << "Вводите элементы " ;
+	//for (i2 = 0; i2 != qq; i2++)
+	//{
+	//	setlocale(LC_ALL, "Russian");
+	//	cout << "Элемент: ";
+	//	cin >> e;
+	//	mas4[i2] = e;
+	//}
+	//setlocale(LC_ALL, "russian_russia.866");
+	//cout << fperem(mas4[]);
+	setlocale(LC_ALL, "Russian");
+	cout << "Перегруженные функции и шаблон функции: ";
+	setlocale(LC_ALL, "Russian");
+	cout << "Введите массив ( 10 элементов ) " << "\n";
+	for (i2 = 0; i2 != np; i2++)
+	{
+		setlocale(LC_ALL, "Russian");
+		cout << "Элемент: ";
+		cin >> e;
+		mas5[i2] = e;
+	}
+	setlocale(LC_ALL, "Russian");
+	cout << "Введите элемент, который надо найти ";
+	cin >> q2;
+	for (i2 = 0; i2 != np; i2++)
+	{
+		poisk(q2, mas5[i2]);
+		if (q2 == 1)
+		{
+			i2 = np + 1;
+		}
+	}
+	setlocale(LC_ALL, "Russian");
+	cout << "Метод Ньютона для функции x - (1/(3+sin3.6x) = 0 " << "\n";
+	setlocale(LC_ALL, "Russian");
+	cout << "Введите X0 " ;
+	cin >> x0;
+	cin.get();
+	return 0;
+}
