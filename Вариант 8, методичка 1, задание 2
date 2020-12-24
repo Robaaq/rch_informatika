@@ -1,0 +1,20 @@
+#Вариант 8, методичка 1, задание 2
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main()
+{
+    int n;
+    double a,sum;
+    a = 1;
+    sum = 0;
+    n = 1;
+    while (a > 0.0001)
+    {
+        a = (2 * n + 1) / (4 * n - 2);
+        sum = sum + a;
+        n = n + 1;
+    }
+    cout << "\n" << sum;
+    return 0;
+}
