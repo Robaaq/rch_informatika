@@ -1,0 +1,31 @@
+#Вариант 8, методичка 1, задание 3
+#define _USE_MATH_DEFINES
+#include <iostream>
+#include <math.h>
+using namespace std;
+int main()
+{
+    double x = 0.1, s = 0, s1 = 0, sn = 0, e = 0.0001, se = 0, y = 0;
+    int n = 1;
+    while(x <= 0.8)
+    {
+        cout << "X = " << x << "  ";
+        while(n <= 40)
+        {
+            s = pow(x, n)*sin((M_PI / 4));
+            sn = sn + s;
+            n = n++;
+            s1 = pow(x, e)*sin((M_PI / 4));
+            se = se + s1;
+        }
+        y = (x*sin(M_PI/4))/(1 - 2*x*cos(M_PI/4)*x*x);
+        cout << "SN = " << sn << "  ";
+        cout << "SE = " << se << "  ";
+        cout << "Y = " << y << "\n";
+        s = 1;
+        n = 1;
+        y = 0;
+        x = x + 0.07;
+    }
+    return 0;
+}
