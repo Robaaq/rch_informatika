@@ -1,4 +1,4 @@
-#Вар 8, методичка 1, задание 1.1 с помощью double
+#Вариант 8, методичка 1, задание 1.1 с помощью double
 #include <iostream>
 #include <math.h>
 using namespace std;
