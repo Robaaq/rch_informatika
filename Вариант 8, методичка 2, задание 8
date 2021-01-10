@@ -1,0 +1,50 @@
+#include "iostream"
+using namespace std;
+struct ELEM {
+	char a;
+	ELEM* pNext;
+}*head;
+
+void dob(char m_val)
+{
+	ELEM* pElem = new ELEM;
+	pElem->a = m_val;
+	pElem->pNext = head;
+	head = pElem;
+}
+void vivod()
+{
+	ELEM* elem = head;
+	while (elem)
+	{
+		printf("%d ", elem->a);
+		elem = elem->pNext;
+	}
+}
+
+void vivod2()
+{
+	ELEM* elem = head;
+	while (elem)
+	{
+		printf("%d ", elem->a);
+		elem = elem->pNext;
+		elem = elem->pNext;
+	}
+}
+
+int main()
+{
+	int n;
+	setlocale(LC_ALL, "Russian");
+	cout << "Введите кол-во элементов n = ";
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		dob(i);
+	}
+	vivod();
+	cout << "\n";
+	vivod();
+	vivod2();
+}
