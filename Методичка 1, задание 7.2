@@ -1,0 +1,23 @@
+#include<iostream>
+using namespace std;
+int min(int k, ...)
+{
+    int* p = &k;
+    int s = *p;
+    while (*p)
+    {
+        if (*p < s)
+        {
+            s = *p;
+        }
+        p++;
+    }
+    return s;
+}
+int main()
+{
+    cout << min(100, 7406, 413, 272, 852, 0) << "\n";
+    cout << min(5276, 85275, 1112, 5, 725, 425, 1400, 109, 167250, 984, 0) << "\n";
+    cout << min(561, 89, 512, 418, 163, 316, 255, 5111, 1152, 11, 223, 3318, 0) << "\n";
+    return 0;
+}
