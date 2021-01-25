@@ -1,0 +1,32 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <Windows.h>
+using namespace std;
+
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    ifstream in("F1.txt"); 
+    ofstream out("F2.txt"); 
+    string stroka; 
+    unsigned int A = 0;
+    bool x = false;
+    while (getline(in, stroka))
+    {
+        for (unsigned int i = 0; i < stroka.length(); i++)
+            if (isdigit((unsigned char)stroka[i]))
+                x = true;
+
+        if (!x)
+        {
+            out << stroka << '\n';
+            if (stroka[0] == 'А') // буква на русском языке
+                A++;
+        }
+        else
+            x = false;
+    }
+    cout << "Строк, начинающиеся на 'A': " << A;
+    return 0;
+}
