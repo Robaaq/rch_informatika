@@ -1,0 +1,61 @@
+#include <iostream>
+#include <fstream>
+#include <stdio.h>
+#include <locale>
+#include <iterator>
+#include <vector>
+#pragma warning(disable:4996)
+
+using namespace std;
+struct point
+{
+	char* key;
+	point* next;
+	point* pred;
+};
+point* make_point()
+{
+	setlocale(LC_ALL, "Russian");
+	point* p = new(point);
+	p->next = 0; 
+	p->pred = 0;
+	char s[50];
+	cout << "\n введите элемент ";
+	cin >> s;
+	p->key = new char[strlen(s) + 1];
+	strcpy(p->key, s);
+	return p;
+}
+point* make_list(int n)
+{
+	point* p, * beg;
+	beg = make_point();
+	for (int i = 1; i < n; i++)
+	{
+		p = make_point();
+		p->next = beg;
+		beg->pred = p;
+		beg = p;
+	}
+	return beg;
+}
+void vivod()
+{
+	point* p = new(point);
+	for (p = head; p; p = p->next)
+	{
+		cout << p->key << " ";
+	}
+} 
+int main()
+{
+	int n;
+	setlocale(LC_ALL, "Russian");
+	cout << "Введите кол-во элементов n = ";
+	cin >> n;
+	for (int i = 1; i < n; i++)
+	{
+		make_point();
+	}
+	vivod();
+}
