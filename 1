@@ -1,0 +1,80 @@
+import telebot
+from telebot import types
+import random
+
+bot = telebot.TeleBot("1314473928:AAFgLa-sTurORqVh9IuciLkHZa3v_ZgO49k", parse_mode=None)
+winig = 0
+winbo = 0
+winif = [('k', 'n'), ('b', 'k'), ('n', 'b')]
+lossif = [('n', 'k'), ('k', 'b'), ('b', 'n')]
+vibor = {'k', 'n', 'b'}
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.send_message(message.from_user.id, 'Добро пожаловать. ')
+    bot.send_message(message.from_user.id, 'Со мной можно поигать в игры ')
+    markup = types.ReplyKeyboardMarkup()
+    markup.add('Камень, ножницы, бумага')
+    bot.send_message(message.chat.id, "Нажимите на кнопку ", reply_markup=markup)
+
+@bot.message_handler(content_types=['text'])
+def knb(message):
+    if message.text == 'Камень, ножницы, бумага':
+        bot.send_message(message.chat.id, 'Это игра "Камень, ножницы, бумага" ')
+        bot.send_message(message.chat.id, ' Буква к - камень, н - ножницы, б - бумага, отмена = выход')
+        keyboard2 = types.InlineKeyboardMarkup()
+        key2_k = types.InlineKeyboardButton(text='камень', callback_data='k')
+        keyboard2.row(key2_k)
+        key2_n = types.InlineKeyboardButton(text='ножницы', callback_data='n')
+        keyboard2.row(key2_n)
+        key2_b = types.InlineKeyboardButton(text='бумага', callback_data='b')
+        keyboard2.row(key2_b)
+        bot.send_message(message.from_user.id, text='Выберите ', reply_markup=keyboard2)
+
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback(call):
+    global winig, winbo, winif, lossif, vibor, a1, a2
+    if call.data in vibor:
+        if call.data == 'k':
+            a1 = "камень"
+        elif call.data == 'n':
+            a1 = "ножницы"
+        elif call.data == 'b':
+            a1 = "бумага"
+    bot.send_message(call.message.chat.id, f'Ваш выбор: {a1}')
+    if call.data not in vibor:
+        bot.send_message(call.message.chat.id, 'Не понятно. Попробуйте заново начать игру ')
+    if call.data in vibor:
+        vbot = random.choice('knb')
+        if vbot == 'k':
+            a2 = "камень"
+        elif vbot == 'n':
+            a2 = "ножницы"
+        elif vbot == 'k':
+            a2 = "бумага"
+        bot.send_message(call.message.chat.id, f'Выбор бота: {a2}')
+        if (call.data, vbot) in winif:
+            winig += 1
+            bot.send_message(call.message.chat.id, 'Вы побидили ')
+        elif call.data == vbot:
+            bot.send_message(call.message.chat.id, 'Никто не победил ')
+        elif (call.data, vbot) in lossif:
+            winbo += 1
+            bot.send_message(call.message.chat.id, 'Бот победил ')
+    bot.send_message(call.message.chat.id, f'Статистика игры:\n игрок - {winig}\n бот - {winbo}')
+    keyboard2 = types.InlineKeyboardMarkup()
+    key2_k = types.InlineKeyboardButton(text='камень', callback_data='k')
+    keyboard2.row(key2_k)
+    key2_n = types.InlineKeyboardButton(text='ножницы', callback_data='n')
+    keyboard2.row(key2_n)
+    key2_b = types.InlineKeyboardButton(text='бумага', callback_data='b')
+    keyboard2.row(key2_b)
+    bot.send_message(call.message.chat.id, text='Выберите ', reply_markup=keyboard2)
+
+    @bot.message_handler(commands=['stop'])
+    def stop(message):
+        bot.send_message(message.from_user.id, 'Пока ')
+        bot.stop_polling()
+
+bot.polling(none_stop=True)
